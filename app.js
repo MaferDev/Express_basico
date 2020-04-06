@@ -4,6 +4,7 @@ const express =require('express'),
  app = express()
  //app.get('/', (req, res) => res.send('Hello World!'))
 app
+ .use(express.json())
  .use(routes)
  .use((req,res,next)=>next(createError(404)))
  .use((error,req,res,next)=>{
