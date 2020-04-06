@@ -14,6 +14,7 @@ const express =require('express'),
  app
  .use(express.json()) //Middelware permite hacer procesos antes de dar respuesta
  .use(logger('dev'))
+ .use(express.static('public'))
  .use(routes)
  .use((req,res,next)=>next(createError(404)))
  .use((error,req,res,next)=>{
