@@ -2,7 +2,12 @@ const express = require('express'),
  router=express.Router()
 
 router
- .get('/',(req,res,next)=>res.send('Hello world'))
+ .get('/',(req,res)=>{
+  const users=[{name:'Andrea'},{name:'Andrea 2'},{name:'Andrea 3'}]
+  const data = {users:users,title:"Usuarios"}
+  console.log(data)
+  res.render('index.hbs',data)
+ })
  .get('/user',(req,res,next)=>res.json({
   name:'Fernanda',
   lastname:'Huaman'

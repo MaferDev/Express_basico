@@ -10,15 +10,21 @@ const express =require('express'),
   next()
  }
  */
+//SETTING
+app
+ .set('port',process.env.PORT||3000) 
+ .set('view engine','hbs')
+
+//MIDDELWARE Y ROUTER
 
  app
  .use(express.json()) //Middelware permite hacer procesos antes de dar respuesta
  .use(logger('dev'))
- .use(express.static('public'))
  .use(routes)
+ .use(express.static('public'))
  .use((req,res,next)=>next(createError(404)))
  .use((error,req,res,next)=>{
   res.status(error.static||500)
-  res.render('error: ')
+  res.render('error: ',error.static)
  })
- .listen(3000,()=>console.log("Se inicio en el puerto 3000"))
+ .listen(app.get('port'),()=>console.log(`Se inicio en el puerto ${app.get('port')}`))
