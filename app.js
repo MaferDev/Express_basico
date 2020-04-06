@@ -1,10 +1,19 @@
 const express =require('express'),
  createError= require('http-errors'),
+ logger = require('morgan'),
  routes = require('./routes/index'),
  app = express()
- //app.get('/', (req, res) => res.send('Hello World!'))
-app
- .use(express.json())
+
+ //Este middelware se va ejecutar siempre
+/* const logger =(req,res,next)=>{
+  console.log(`Router Recived: ${req.protocol}://${req.get('host')}${req.originalUrl}`)
+  next()
+ }
+ */
+
+ app
+ .use(express.json()) //Middelware permite hacer procesos antes de dar respuesta
+ .use(logger('dev'))
  .use(routes)
  .use((req,res,next)=>next(createError(404)))
  .use((error,req,res,next)=>{
